@@ -7,7 +7,7 @@ let bar_sep fmt () = fprintf fmt "|@ "
 
 let rec type_desc ?(bracket = false) fmt = function
   | Tvar (None, _, _) -> fprintf fmt "_"
-  | Tvar (Some name, _, _) -> fprintf fmt "%s" name.txt
+  | Tvar (Some name, _, _) -> fprintf fmt "'%s" name.txt
   | Ttuple typs -> tuple fmt typs
   | Tarrow (typ1, typ2, implicitness) ->
       if bracket then fprintf fmt "(" ;
@@ -79,9 +79,9 @@ let type_decl fmt decl =
 
 let rec signature_desc fmt = function
   | SValue (name, typ) ->
-      fprintf fmt "@[let@ %s@ :@ @[%a;@]@]@;@;" name.txt type_expr typ
+      fprintf fmt "@[let@ %a@ :@ @[%a;@]@]@;@;" pp_name name.txt type_expr typ
   | SInstance (name, typ) ->
-      fprintf fmt "@[instance@ %s@ :@ @[%a@];@]@;@;" name.txt type_expr typ
+      fprintf fmt "@[instance@ %a@ :@ @[%a@];@]@;@;" pp_name name.txt type_expr typ
   | STypeDecl decl -> fprintf fmt "@[%a;@]@;@;" type_decl decl
   | SModule (name, msig) ->
       let prefix fmt = fprintf fmt ":@ " in
