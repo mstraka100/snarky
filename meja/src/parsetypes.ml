@@ -1,13 +1,13 @@
 open Core_kernel
 
 let pp_name ppf name =
-  let c = String.get name 0 in
-  if ((Char.compare c 'a' >= 0) && (Char.compare c 'z' <= 0)) ||
-     ((Char.compare c 'A' >= 0) && (Char.compare c 'z' <= 0)) ||
-     Char.equal c '_' then
-    Format.pp_print_string ppf name
-  else
-    Format.fprintf ppf "(%s)" name
+  let c = name.[0] in
+  if
+    (Char.compare c 'a' >= 0 && Char.compare c 'z' <= 0)
+    || (Char.compare c 'A' >= 0 && Char.compare c 'z' <= 0)
+    || Char.equal c '_'
+  then Format.pp_print_string ppf name
+  else Format.fprintf ppf "(%s)" name
 
 module Longident = struct
   include Longident

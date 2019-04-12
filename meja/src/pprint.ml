@@ -81,7 +81,8 @@ let rec signature_desc fmt = function
   | SValue (name, typ) ->
       fprintf fmt "@[let@ %a@ :@ @[%a;@]@]@;@;" pp_name name.txt type_expr typ
   | SInstance (name, typ) ->
-      fprintf fmt "@[instance@ %a@ :@ @[%a@];@]@;@;" pp_name name.txt type_expr typ
+      fprintf fmt "@[instance@ %a@ :@ @[%a@];@]@;@;" pp_name name.txt type_expr
+        typ
   | STypeDecl decl -> fprintf fmt "@[%a;@]@;@;" type_decl decl
   | SModule (name, msig) ->
       let prefix fmt = fprintf fmt ":@ " in
